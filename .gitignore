@@ -2,3 +2,5 @@
 *.MKL.*
 MKL*.GINI
 MKL_*
+bin
+obj

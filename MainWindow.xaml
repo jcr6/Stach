@@ -22,7 +22,7 @@
                     <TabControl HorizontalAlignment="Left" Height="825" Margin="10,10,0,0" VerticalAlignment="Top" Width="185">
                         <TabItem Header="System">
                             <Grid Background="Black">
-                                <ListBox x:Name="List_System" HorizontalAlignment="Left" Height="787" Margin="10,0,0,0" VerticalAlignment="Top" Width="159" FontFamily="Courier New">
+                                <ListBox x:Name="List_System" HorizontalAlignment="Left" Height="787" Margin="10,0,0,0" VerticalAlignment="Top" Width="159" FontFamily="Courier New" SelectionChanged="List_System_SelectionChanged">
                                     <ListBox.Foreground>
                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                             <GradientStop Color="#FFB9FF00" Offset="0"/>
@@ -50,7 +50,7 @@
                     <Label Content="Directory:" HorizontalAlignment="Left" Margin="200,31,0,0" VerticalAlignment="Top" Width="61" Foreground="#FFFFB400"/>
                     <TextBox x:Name="txt_Resource" HorizontalAlignment="Left" Height="23" Margin="266,4,0,0" TextWrapping="Wrap" Text=".." IsReadOnly="True" VerticalAlignment="Top" Width="896" Background="Black" Foreground="#FFFFB400"/>
                     <TextBox x:Name="txt_Directory" HorizontalAlignment="Left" Height="23" Margin="266,29,0,0" TextWrapping="Wrap" Text=".." IsReadOnly="True" VerticalAlignment="Top" Width="896" Background="Black" Foreground="#FFFFB400"/>
-                    <ListBox HorizontalAlignment="Left" Height="728" Margin="214,62,0,0" VerticalAlignment="Top" Width="381" Background="{x:Null}">
+                    <ListBox x:Name="DirBox" MouseDoubleClick="DirBox_MouseDoubleClick"  HorizontalAlignment="Left" Height="728" Margin="214,62,0,0" VerticalAlignment="Top" Width="381" Background="{x:Null}" SelectionChanged="DirBox_SelectionChanged">
                         <ListBox.Foreground>
                             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                 <GradientStop Color="#FFFFB400" Offset="0"/>
@@ -63,12 +63,19 @@
                             <ImageBrush ImageSource="Back_JCR.png"/>
                         </TabControl.Background>
                         <TabItem Header="Data">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid>
+                                <Grid.Background>
+                                    <ImageBrush ImageSource="Back_JCR.png" Stretch="UniformToFill"/>
+                                </Grid.Background>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="View">
                             <Grid Background="#FFE5E5E5"/>
                         </TabItem>
                     </TabControl>
+                    <Button Content="Open JCR" x:Name="Butt_OpenJCR" HorizontalAlignment="Left" Margin="214,795,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Extract" x:Name="Butt_Extract" HorizontalAlignment="Left" Margin="294,795,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Extract All" x:Name="Butt_ExtractAll" HorizontalAlignment="Left" Margin="374,795,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>
             <TabItem Header="System">

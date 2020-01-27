@@ -59,6 +59,28 @@ namespace Stach {
             Debug.WriteLine("Updating Resource Header");
         }
 
+        void UpdateDirBox() {           
+            UpdateResourceHeader();
+            DirBox.Items.Clear();
+            if (Core.IN_Resource) {
+                // TODO: List out JCR6 resource
+            } else {
+                try {
+                    DirBox.Items.Add("../");
+                    foreach (string f in FileList.GetDir(Core.CDirectory, 1)) {
+                        var ff = $"{Core.CDirectory}/{f}";
+                        if (Directory.Exists(ff)) {
+                            DirBox.Items.Add($"{f}/");
+                        } else {
+                            DirBox.Items.Add($"{f}");
+                        }
+                    }
+                } catch(Exception E) {
+                    Confirm.Annoy(E.Message, "Error during scanning directory", System.Windows.Forms.MessageBoxIcon.Error);
+                }
+            }
+        }
+
         #region CallBack
         public MainWindow() {
             try {
@@ -73,7 +95,7 @@ namespace Stach {
                 var startd = Directory.GetCurrentDirectory().Replace('\\', '/');
                 Core.IN_Resource = false;
                 Core.CDirectory =startd;
-                UpdateResourceHeader();
+                UpdateDirBox();
             } catch (Exception e) {
 #if DEBUG
                 Confirm.Annoy($"{e}\n\n{e.StackTrace}\n\nI will try to continue, but expect things NOT to go so well!", "Start up error!", System.Windows.Forms.MessageBoxIcon.Error);
@@ -97,5 +119,39 @@ namespace Stach {
             }
         }
         #endregion
+
+        private void DirBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            
+        }
+
+        private void DirBox_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
+            if (DirBox.SelectedItem == null) return;
+            var item = (string)DirBox.SelectedItem;
+            //var d = item.Content.ToString();
+            Debug.WriteLine($"Double-clicked {item}");
+            if (!qstr.Suffixed(item, "/")) return;
+            if (Core.IN_Resource) {
+                if (item == "../") {
+                    // TODO: Parent inside resource
+                } else {
+                    // TODO: Change inside resource
+                }
+            } else {
+                Directory.SetCurrentDirectory(item);
+                Core.CDirectory = Directory.GetCurrentDirectory();
+                UpdateDirBox();
+            }
+        }
+
+        private void List_System_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (List_System.SelectedItem == null) return;
+            var item = (string)List_System.SelectedItem;
+            var D = Dirry.AD($"{item}:");
+            Debug.WriteLine(D);
+            Directory.SetCurrentDirectory(D);
+            Core.IN_Resource = false;
+            Core.CDirectory = Directory.GetCurrentDirectory();
+            UpdateDirBox();
+        }
     }
 }

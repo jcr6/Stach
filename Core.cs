@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.01.28
+// Version: 20.01.27
 // EndLic
 
 using System;
@@ -30,6 +30,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using TrickyUnits;
+using UseJCR6
 
 namespace Stach {
     static class Core {
@@ -49,12 +50,19 @@ namespace Stach {
 
         static Core() {
             MKL.Lic    ("Stach - Core.cs","GNU General Public License 3");
-            MKL.Version("Stach - Core.cs","20.01.28");
+            MKL.Version("Stach - Core.cs","20.01.27");
             FFS.Hello();
             Debug.WriteLine($"Running on {Platform}");
             Dirry.InitAltDrives();
             Config = GINIE.FromFile($"{Dirry.C("$AppSupport$/Stach.ini")}");
             Config.AutoSaveSource = $"{Dirry.C("$AppSupport$/Stach.ini")}";
+            JCR6_lzma.Init();
+            JCR6_jxsrcca.Init();
+            JCR6_zlib.Init();
+            new JCR_QuakePack();
+            new JCR_a();
+            new JCR_QuickLink();
+            new JCR_JCR5();
         }
     }
 }

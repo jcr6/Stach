@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.01.27
+// Version: 20.01.28
 // EndLic
 
 using System;
@@ -49,7 +49,7 @@ namespace Stach {
 
         static Core() {
             MKL.Lic    ("Stach - Core.cs","GNU General Public License 3");
-            MKL.Version("Stach - Core.cs","20.01.27");
+            MKL.Version("Stach - Core.cs","20.01.28");
             FFS.Hello();
             Debug.WriteLine($"Running on {Platform}");
             Dirry.InitAltDrives();

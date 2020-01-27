@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.01.27
+// Version: 20.01.28
 // EndLic
 using System;
 using System.Collections.Generic;
@@ -85,8 +85,8 @@ namespace Stach {
         public MainWindow() {
             try {
                 InitializeComponent();
-                MKL.Version("Stach - MainWindow.xaml.cs", "20.01.27");
-                MKL.Lic("Stach - MainWindow.xaml.cs", "GNU General Public License 3");
+                MKL.Version("Stach - MainWindow.xaml.cs","20.01.28");
+                MKL.Lic    ("Stach - MainWindow.xaml.cs","GNU General Public License 3");
                 Title = $"Stach - (c) {MKL.CYear(2020)} Jeroen P. Broks";
                 ExampleSwap.Text = Core.Config[Platform, "ExampleSwap"];
                 foreach(string ad in Dirry.AltDriveList) {

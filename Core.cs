@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.01.27
+// Version: 20.01.28
 // EndLic
 
 using System;
@@ -30,7 +30,7 @@ using System.Linq;
 using System.Text;
 using System.Diagnostics;
 using TrickyUnits;
-using UseJCR6
+using UseJCR6;
 
 namespace Stach {
     static class Core {
@@ -39,18 +39,24 @@ namespace Stach {
 
         static public bool IN_Resource = false;
         static string __Resource="";
+        static TJCRDIR __JCR;
         static public string Resource {
-            set { __Resource = value; IN_Resource = true; }
+            set { __Resource = value; IN_Resource = true; __JCR = JCR6.Dir(value); if (__JCR == null) { Confirm.Annoy(JCR6.JERROR, "JCR6 Error", System.Windows.Forms.MessageBoxIcon.Error); IN_Resource = false; } }
             get {
                 if (!IN_Resource) return "* File System *";
                 return __Resource;
             }
         }
         static public string CDirectory;
+        public static TJCRDIR JCR { get {
+                if (!IN_Resource) return null;
+                return __JCR;
+            }
+        }
 
         static Core() {
             MKL.Lic    ("Stach - Core.cs","GNU General Public License 3");
-            MKL.Version("Stach - Core.cs","20.01.27");
+            MKL.Version("Stach - Core.cs","20.01.28");
             FFS.Hello();
             Debug.WriteLine($"Running on {Platform}");
             Dirry.InitAltDrives();
@@ -63,6 +69,7 @@ namespace Stach {
             new JCR_a();
             new JCR_QuickLink();
             new JCR_JCR5();
+            new JCR6_WAD();
         }
     }
 }

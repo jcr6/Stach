@@ -38,6 +38,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TrickyUnits;
+using UseJCR6;
 
 namespace Stach {
     /// <summary>
@@ -63,7 +64,35 @@ namespace Stach {
             UpdateResourceHeader();
             DirBox.Items.Clear();
             if (Core.IN_Resource) {
-                // TODO: List out JCR6 resource
+                var files = new List<string>();
+                var dirs = new List<string>();
+                foreach(TJCREntry e in Core.JCR.Entries.Values) {
+                    var d = qstr.ExtractDir(e.Entry).ToUpper();
+                    Debug.WriteLine($"{d} => {e.Entry}");
+                    if (d == Core.CDirectory) {
+                        files.Add(qstr.StripDir(e.Entry));
+                    }
+                    if (d != "") {
+                        var dd = qstr.ExtractDir(d).ToUpper();                        
+                        if (dd == Core.CDirectory && (!dirs.Contains(qstr.StripDir(d.ToUpper()))))
+                            dirs.Add(qstr.StripDir(d.ToUpper()));
+                        else if (d.Length>Core.CDirectory.Length && (Core.CDirectory=="" || qstr.Prefixed (d,Core.CDirectory))) {
+                            var ded = qstr.Right(d.ToUpper(), d.Length-Core.CDirectory.Length);
+                            var p = ded.IndexOf('/');
+                            if (p>=0) {
+                                var dr = ded.Substring(0, p);
+                                if (dr!="" && (!dirs.Contains(dr)))
+                                    dirs.Add(dr);
+                            }
+                        }
+
+                    }
+                }
+                dirs.Sort();
+                files.Sort();
+                DirBox.Items.Add("../");
+                foreach (string d in dirs) DirBox.Items.Add($"{d}/");
+                foreach (string f in files) DirBox.Items.Add(f);
             } else {
                 try {
                     DirBox.Items.Add("../");
@@ -129,12 +158,38 @@ namespace Stach {
             var item = (string)DirBox.SelectedItem;
             //var d = item.Content.ToString();
             Debug.WriteLine($"Double-clicked {item}");
-            if (!qstr.Suffixed(item, "/")) return;
+            if (!qstr.Suffixed(item, "/")) {
+                if (Core.IN_Resource)
+                    return;
+                var rf = $"{Core.CDirectory}/{item}";
+                var rc = JCR6.Recognize(rf);
+                Debug.WriteLine($"Analysing {rf} => {rc}");
+                if (rc == "NONE") return;
+                Core.IN_Resource = true;
+                Core.Resource = rf;
+                Core.CDirectory = "";
+                UpdateDirBox();
+                return;
+            }
             if (Core.IN_Resource) {
                 if (item == "../") {
-                    // TODO: Parent inside resource
+                    if (Core.CDirectory=="") {
+                        Directory.SetCurrentDirectory(qstr.ExtractDir(Core.Resource));
+                        Core.IN_Resource = false;
+                        Core.CDirectory = Directory.GetCurrentDirectory();
+                        UpdateDirBox();
+                        return;
+                    }
+                    Core.CDirectory = qstr.ExtractDir(Core.CDirectory);
+                    UpdateDirBox();
+                    return;
                 } else {
-                    // TODO: Change inside resource
+                    if (Core.CDirectory == "")
+                        Core.CDirectory = item.Substring(0, item.Length - 1);
+                    else
+                        Core.CDirectory += $"/{item.Substring(0, item.Length - 1)}";
+                    UpdateDirBox();
+                    return;
                 }
             } else {
                 Directory.SetCurrentDirectory(item);

@@ -41,7 +41,12 @@ namespace Stach {
         static string __Resource="";
         static TJCRDIR __JCR;
         static public string Resource {
-            set { __Resource = value; IN_Resource = true; __JCR = JCR6.Dir(value); if (__JCR == null) { Confirm.Annoy(JCR6.JERROR, "JCR6 Error", System.Windows.Forms.MessageBoxIcon.Error); IN_Resource = false; } }
+            set {
+                __Resource = value;
+                IN_Resource = true;
+                __JCR = JCR6.Dir(value);
+                if (__JCR == null) { Confirm.Annoy(JCR6.JERROR, "JCR6 Error", System.Windows.Forms.MessageBoxIcon.Error); IN_Resource = false; DirList = null; } else DirList = __JCR.DirList;
+            }
             get {
                 if (!IN_Resource) return "* File System *";
                 return __Resource;
@@ -53,6 +58,7 @@ namespace Stach {
                 return __JCR;
             }
         }
+        public static string[] DirList { get; private set; } = null;
 
         static Core() {
             MKL.Lic    ("Stach - Core.cs","GNU General Public License 3");

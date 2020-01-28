@@ -53,6 +53,17 @@ namespace Stach {
         bool AutoConfigUpdate = false;
         #endregion
 
+        static Dictionary<string, Label> EntryLink = new Dictionary<string, Label>();
+        public sealed class CELink {
+            Label this[string k] {
+                get {
+                    if (!EntryLink.ContainsKey(k)) return null;
+                    return EntryLink[k];
+                }
+            }
+        }
+        public CELink ELink = new CELink();
+
         void UpdateResourceHeader() {
             //Debug.WriteLine($"{Core.Resource}");
             txt_Resource.Text = Core.Resource.Replace('\\', '/');
@@ -66,12 +77,13 @@ namespace Stach {
             if (Core.IN_Resource) {
                 var files = new List<string>();
                 var dirs = new List<string>();
-                foreach(TJCREntry e in Core.JCR.Entries.Values) {
+                foreach (TJCREntry e in Core.JCR.Entries.Values) {
                     var d = qstr.ExtractDir(e.Entry).ToUpper();
-                    Debug.WriteLine($"{d} => {e.Entry}");
+                    //Debug.WriteLine($"{d} => {e.Entry}");
                     if (d == Core.CDirectory) {
                         files.Add(qstr.StripDir(e.Entry));
                     }
+                    /*
                     if (d != "") {
                         var dd = qstr.ExtractDir(d).ToUpper();                        
                         if (dd == Core.CDirectory && (!dirs.Contains(qstr.StripDir(d.ToUpper()))))
@@ -87,6 +99,11 @@ namespace Stach {
                         }
 
                     }
+                    */
+                }
+                var drl = Core.DirList;
+                foreach (string dr in drl) {
+                    if (dr != "" && qstr.ExtractDir(dr) == Core.CDirectory && (!dirs.Contains(qstr.StripDir(dr)))) dirs.Add(qstr.StripDir(dr));
                 }
                 dirs.Sort();
                 files.Sort();
@@ -95,6 +112,8 @@ namespace Stach {
                 foreach (string f in files) DirBox.Items.Add(f);
             } else {
                 try {
+                    ResType.Content = $"{Platform}:File Sytem";
+                    ResTableSTG.Content = "N/A";
                     DirBox.Items.Add("../");
                     foreach (string f in FileList.GetDir(Core.CDirectory, 1)) {
                         var ff = $"{Core.CDirectory}/{f}";
@@ -104,10 +123,22 @@ namespace Stach {
                             DirBox.Items.Add($"{f}");
                         }
                     }
-                } catch(Exception E) {
+                } catch (Exception E) {
                     Confirm.Annoy(E.Message, "Error during scanning directory", System.Windows.Forms.MessageBoxIcon.Error);
                 }
             }
+        }
+
+        void RegisterEntryFields() {
+            EntryLink["__Entry"] = Entry_Entry;
+            EntryLink["__Size"] = Entry_Size;
+            EntryLink["__CSize"] = Entry_CSize;
+            EntryLink["__Storage"] = Entry_Storage;
+            EntryLink["__Offset"] = Entry_Offset;
+            EntryLink["__MD5HASH"] = Entry_MD5Hash;
+            EntryLink["__JCR6FOR"] = Entry_JCR6FOR;
+            EntryLink["__Author"] = Entry_Author;
+            EntryLink["__Notes"] = Entry_Notes;
         }
 
         #region CallBack
@@ -122,6 +153,7 @@ namespace Stach {
                     List_System.Items.Add(ad);
                 }
                 var startd = Directory.GetCurrentDirectory().Replace('\\', '/');
+                RegisterEntryFields();
                 Core.IN_Resource = false;
                 Core.CDirectory =startd;
                 UpdateDirBox();
@@ -150,7 +182,44 @@ namespace Stach {
         #endregion
 
         private void DirBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            
+            Entry_Alias.Items.Clear();
+            if (DirBox.SelectedItem == null) {
+                foreach (string EL in EntryLink.Keys) EntryLink[EL].Content = "--";
+                return;
+            }
+            var item = (string)DirBox.SelectedItem;
+            if (Core.IN_Resource) {
+                var ename = $"{Core.CDirectory}/{item}";
+                while (ename!="" && ename[0] == '/') ename = ename.Substring(1);
+                if (qstr.Suffixed(ename, "/")){
+                    foreach (string EL in EntryLink.Keys) EntryLink[EL].Content = "N/A";
+                    Entry_Entry.Content = ename;
+                    Entry_Type.Content = "Directory";
+                } else {
+                    var E = Core.JCR.Entries[ename.ToUpper()];
+                    foreach(TJCREntry ECHK in Core.JCR.Entries.Values) {
+                        if (ECHK != E && ECHK.MainFile == E.MainFile && ECHK.Offset == E.Offset) Entry_Alias.Items.Add(ECHK.Entry);
+                    }
+                    foreach (string k in E.databool.Keys) {
+                        if (EntryLink.ContainsKey(k)) {
+                            if (E.databool[k]) EntryLink[k].Content = "Yes"; else EntryLink[k].Content = "No";
+                        }
+                    }
+                    foreach (string k in E.dataint.Keys) {
+                        if (EntryLink.ContainsKey(k)) {
+                            EntryLink[k].Content = $"{E.dataint[k]}";
+                        }
+                    }
+                    foreach (string k in E.datastring.Keys) {
+                        if (EntryLink.ContainsKey(k)) {
+                            EntryLink[k].Content = $"{E.datastring[k]}";
+                        }
+                    }
+                    Entry_Main.Content = E.MainFile;
+                    Entry_Ratio.Content = E.Ratio;
+                }
+
+            }
         }
 
         private void DirBox_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
@@ -169,6 +238,8 @@ namespace Stach {
                 Core.Resource = rf;
                 Core.CDirectory = "";
                 UpdateDirBox();
+                ResTableSTG.Content = Core.JCR.FATstorage;
+                ResType.Content = rc;
                 return;
             }
             if (Core.IN_Resource) {
@@ -176,7 +247,7 @@ namespace Stach {
                     if (Core.CDirectory=="") {
                         Directory.SetCurrentDirectory(qstr.ExtractDir(Core.Resource));
                         Core.IN_Resource = false;
-                        Core.CDirectory = Directory.GetCurrentDirectory();
+                        Core.CDirectory = Directory.GetCurrentDirectory().Replace('\\','/');
                         UpdateDirBox();
                         return;
                     }
@@ -193,7 +264,7 @@ namespace Stach {
                 }
             } else {
                 Directory.SetCurrentDirectory(item);
-                Core.CDirectory = Directory.GetCurrentDirectory();
+                Core.CDirectory = Directory.GetCurrentDirectory().Replace('\\','/');
                 UpdateDirBox();
             }
         }
@@ -205,7 +276,7 @@ namespace Stach {
             Debug.WriteLine(D);
             Directory.SetCurrentDirectory(D);
             Core.IN_Resource = false;
-            Core.CDirectory = Directory.GetCurrentDirectory();
+            Core.CDirectory = Directory.GetCurrentDirectory().Replace('\\','/');
             UpdateDirBox();
         }
     }

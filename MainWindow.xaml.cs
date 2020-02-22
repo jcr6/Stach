@@ -183,6 +183,8 @@ namespace Stach {
 
         private void DirBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             Entry_Alias.Items.Clear();
+            Entry_Ratio.Content = "N/A";
+            Entry_Main.Content = "--";
             if (DirBox.SelectedItem == null) {
                 foreach (string EL in EntryLink.Keys) EntryLink[EL].Content = "--";
                 return;
@@ -237,6 +239,9 @@ namespace Stach {
                 Core.IN_Resource = true;
                 Core.Resource = rf;
                 Core.CDirectory = "";
+                Core.Config.ListAddNew(Platform,"Used",rf);
+                List_Used.Items.Clear();
+                foreach (string u in Core.Config.List(Platform, "Used")) List_Used.Items.Add(u);
                 UpdateDirBox();
                 ResTableSTG.Content = Core.JCR.FATstorage;
                 ResType.Content = rc;
@@ -278,6 +283,42 @@ namespace Stach {
             Core.IN_Resource = false;
             Core.CDirectory = Directory.GetCurrentDirectory().Replace('\\','/');
             UpdateDirBox();
+        }
+
+        private void Butt_Extract_Click(object sender, RoutedEventArgs e) {
+            if (DirBox .SelectedItem == null) { Debug.WriteLine("No item, so no extract"); return; }
+            var item = (string)DirBox.SelectedItem; Debug.WriteLine($"Item: {item}"); if (item =="" || qstr.Suffixed(item,"/")) { Debug.WriteLine("Item is directory, so no extract"); return; }
+            var xas = FFS.RequestFile(true); if (xas == "") return;
+            var ix = qstr.ExtractExt(item).ToLower();
+            var ex = qstr.ExtractExt(xas).ToLower();
+            if (ix!=ex) {
+                switch (Confirm.YNC($"Original extention is \"{ix}\", and given extension is \"{ex}\". This does not match. Add this extension?")) {
+                    case -1:
+                        return;
+                    case 0:
+                        break;
+                    case 1:
+                        xas += $".{ix}";
+                        break;
+                    default:
+                        throw new Exception("Invalid output from Confirm.YNC");
+                }
+            }
+            if (Core.IN_Resource) {
+                try {
+                    var data = Core.JCR.JCR_B($"{Core.CDirectory}/{item}");
+                    if (data == null) throw new Exception($"Unable to get data!\nJCR6 reported: {JCR6.JERROR}");
+                    QuickStream.SaveBytes(xas, data);
+                } catch (Exception E) {
+                    Confirm.Annoy(E.Message, "Error!", System.Windows.Forms.MessageBoxIcon.Error);
+                }
+            } else {
+                try {
+                    File.Copy($"{Core.CDirectory}/{item}", xas, true);
+                } catch (Exception E) {
+                    Confirm.Annoy(E.Message, "Error!", System.Windows.Forms.MessageBoxIcon.Error);
+                }
+            }
         }
     }
 }

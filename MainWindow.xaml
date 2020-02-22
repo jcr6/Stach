@@ -40,7 +40,16 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Used">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="#FFE5E5E5">
+                                <ListBox x:Name="List_Used" HorizontalAlignment="Left" Height="756" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Foreground="#FF191200">
+                                    <ListBox.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFFFB400" Offset="0"/>
+                                            <GradientStop Color="Red" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </ListBox.Background>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                         <TabItem Header="Favs">
                             <Grid Background="#FFE5E5E5"/>
@@ -117,7 +126,7 @@
                         </TabItem>
                     </TabControl>
                     <Button Content="Open JCR" x:Name="Butt_OpenJCR" HorizontalAlignment="Left" Margin="214,795,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Extract" x:Name="Butt_Extract" HorizontalAlignment="Left" Margin="294,795,0,0" VerticalAlignment="Top" Width="75"/>
+                    <Button Content="Extract" x:Name="Butt_Extract" HorizontalAlignment="Left" Margin="294,795,0,0" VerticalAlignment="Top" Width="75" Click="Butt_Extract_Click"/>
                     <Button Content="Extract All" x:Name="Butt_ExtractAll" HorizontalAlignment="Left" Margin="374,795,0,0" VerticalAlignment="Top" Width="75"/>
                 </Grid>
             </TabItem>

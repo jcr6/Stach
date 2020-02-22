@@ -74,7 +74,7 @@ namespace Stach {
             new JCR_QuakePack();
             new JCR_a();
             new JCR_QuickLink();
-            new JCR_JCR5();
+            JCR_JCR5.Init();
             new JCR6_WAD();
         }
     }

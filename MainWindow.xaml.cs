@@ -157,6 +157,7 @@ namespace Stach {
                 Core.IN_Resource = false;
                 Core.CDirectory =startd;
                 UpdateDirBox();
+                RenewUsed();
             } catch (Exception e) {
 #if DEBUG
                 Confirm.Annoy($"{e}\n\n{e.StackTrace}\n\nI will try to continue, but expect things NOT to go so well!", "Start up error!", System.Windows.Forms.MessageBoxIcon.Error);
@@ -224,6 +225,11 @@ namespace Stach {
             }
         }
 
+        void RenewUsed() {
+            List_Used.Items.Clear();
+            foreach (string u in Core.Config.List(Platform, "Used")) List_Used.Items.Add(u);
+        }
+
         private void DirBox_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
             if (DirBox.SelectedItem == null) return;
             var item = (string)DirBox.SelectedItem;
@@ -240,8 +246,7 @@ namespace Stach {
                 Core.Resource = rf;
                 Core.CDirectory = "";
                 Core.Config.ListAddNew(Platform,"Used",rf);
-                List_Used.Items.Clear();
-                foreach (string u in Core.Config.List(Platform, "Used")) List_Used.Items.Add(u);
+                RenewUsed();
                 UpdateDirBox();
                 ResTableSTG.Content = Core.JCR.FATstorage;
                 ResType.Content = rc;

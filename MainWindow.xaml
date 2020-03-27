@@ -41,7 +41,7 @@
                         </TabItem>
                         <TabItem Header="Used">
                             <Grid Background="#FFE5E5E5">
-                                <ListBox x:Name="List_Used" HorizontalAlignment="Left" Height="756" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Foreground="#FF191200">
+                                <ListBox x:Name="List_Used" HorizontalAlignment="Left" Height="756" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Foreground="#FF191200" SelectionChanged="List_Used_SelectionChanged">
                                     <ListBox.Background>
                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                             <GradientStop Color="#FFFFB400" Offset="0"/>

@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.01.28
+// Version: 20.03.27
 // EndLic
 using System;
 using System.Collections.Generic;
@@ -145,7 +145,7 @@ namespace Stach {
         public MainWindow() {
             try {
                 InitializeComponent();
-                MKL.Version("Stach - MainWindow.xaml.cs","20.01.28");
+                MKL.Version("Stach - MainWindow.xaml.cs","20.03.27");
                 MKL.Lic    ("Stach - MainWindow.xaml.cs","GNU General Public License 3");
                 Title = $"Stach - (c) {MKL.CYear(2020)} Jeroen P. Broks";
                 ExampleSwap.Text = Core.Config[Platform, "ExampleSwap"];
@@ -324,6 +324,28 @@ namespace Stach {
                     Confirm.Annoy(E.Message, "Error!", System.Windows.Forms.MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void List_Used_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (List_Used.SelectedItem == null) return;
+            var item = (string)List_Used.SelectedItem;
+            var rf = $"{item}";
+            var rc = JCR6.Recognize(rf);
+            Debug.WriteLine($"Analysing {rf} => {rc}");
+            if (rc == "NONE") {
+                Confirm.Annoy($"{item} was not recognized");
+                return;
+            }
+            Core.IN_Resource = true;
+            Core.Resource = rf;
+            Core.CDirectory = "";
+            //Core.Config.ListAddNew(Platform, "Used", rf);
+            //RenewUsed();
+            UpdateDirBox();
+            ResTableSTG.Content = Core.JCR.FATstorage;
+            ResType.Content = rc;
+            return;
+
         }
     }
 }

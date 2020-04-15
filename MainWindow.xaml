@@ -122,7 +122,15 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="View">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid x:Name="ViewGrid">
+                                <Grid.Background>
+                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                        <GradientStop Color="Black" Offset="0"/>
+                                        <GradientStop Color="#F2FFB400" Offset="1"/>
+                                    </LinearGradientBrush>
+                                </Grid.Background>
+                                <WebBrowser HorizontalAlignment="Left" Height="719" Margin="10,10,0,0" VerticalAlignment="Top" Width="525" Name="Viewer" />
+                            </Grid>
                         </TabItem>
                     </TabControl>
                     <Button Content="Open JCR" x:Name="Butt_OpenJCR" HorizontalAlignment="Left" Margin="214,795,0,0" VerticalAlignment="Top" Width="75"/>

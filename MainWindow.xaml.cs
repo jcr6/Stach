@@ -64,6 +64,10 @@ namespace Stach {
         }
         public CELink ELink = new CELink();
 
+        void ViewNothing() {
+            Viewer.Navigate($"file://{qstr.ExtractDir(MKL.MyExe)}/Nothing.html");
+        }
+
         void UpdateResourceHeader() {
             //Debug.WriteLine($"{Core.Resource}");
             txt_Resource.Text = Core.Resource.Replace('\\', '/');
@@ -158,6 +162,7 @@ namespace Stach {
                 Core.CDirectory =startd;
                 UpdateDirBox();
                 RenewUsed();
+                ViewNothing();
             } catch (Exception e) {
 #if DEBUG
                 Confirm.Annoy($"{e}\n\n{e.StackTrace}\n\nI will try to continue, but expect things NOT to go so well!", "Start up error!", System.Windows.Forms.MessageBoxIcon.Error);

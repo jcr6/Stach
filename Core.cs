@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 
+// (c) Jeroen P. Broks, 2020
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.03.27
+// Version: 20.06.01
 // EndLic
 
 using System;
@@ -36,6 +36,9 @@ namespace Stach {
     static class Core {
         static public GINIE Config;
         static public string Platform => $"{Environment.OSVersion.Platform}";
+        static public string MyExe => MKL.MyExe;
+        static public string MyExeDir => qstr.ExtractDir(MyExe).Replace('\\','/');
+        static public string ViewSwap => Config[Platform, "VIEWSWAP"];
 
         static public bool IN_Resource = false;
         static string __Resource="";
@@ -62,7 +65,7 @@ namespace Stach {
 
         static Core() {
             MKL.Lic    ("Stach - Core.cs","GNU General Public License 3");
-            MKL.Version("Stach - Core.cs","20.03.27");
+            MKL.Version("Stach - Core.cs","20.06.01");
             FFS.Hello();
             Debug.WriteLine($"Running on {Platform}");
             Dirry.InitAltDrives();

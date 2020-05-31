@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 
+// (c) Jeroen P. Broks, 2020
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.03.27
+// Version: 20.06.01
 // EndLic
 using System;
 using System.Collections.Generic;
@@ -149,7 +149,7 @@ namespace Stach {
         public MainWindow() {
             try {
                 InitializeComponent();
-                MKL.Version("Stach - MainWindow.xaml.cs","20.03.27");
+                MKL.Version("Stach - MainWindow.xaml.cs","20.06.01");
                 MKL.Lic    ("Stach - MainWindow.xaml.cs","GNU General Public License 3");
                 Title = $"Stach - (c) {MKL.CYear(2020)} Jeroen P. Broks";
                 ExampleSwap.Text = Core.Config[Platform, "ExampleSwap"];
@@ -225,8 +225,25 @@ namespace Stach {
                     }
                     Entry_Main.Content = E.MainFile;
                     Entry_Ratio.Content = E.Ratio;
-                }
+                    if (Core.Config[Core.Platform,"ViewSwap"]=="") {
+                        Viewer.Navigate($"file://{Core.MyExeDir}/NoViewSwap.html");
+                    } else {
+                        KittyViewer.View($"{E.MainFile}/{E.Entry}", Core.JCR.LoadString(E.Entry));
+                        Viewer.Navigate($"file://{Core.Config[Core.Platform, "VIEWSWAP"]}/ViewFile.html");
+                    }
+                } 
 
+            } else {
+                var ename = $"{Core.CDirectory}/{item}";
+                if (!qstr.Suffixed(ename,"/")) {
+                    if (Core.Config[Core.Platform, "ViewSwap"] == "") {
+                        Viewer.Navigate($"file://{Core.MyExeDir}/NoViewSwap.html");
+                    } else {
+                        KittyViewer.View($"{ename}", QuickStream.LoadString(ename));
+                        Viewer.Navigate($"file://{Core.Config[Core.Platform, "VIEWSWAP"]}/ViewFile.html");
+                    }
+
+                }
             }
         }
 

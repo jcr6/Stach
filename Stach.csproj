@@ -186,6 +186,72 @@
     <Compile Include="..\JCR6\jcr6.cs">
       <Link>JCR6\jcr6.cs</Link>
     </Compile>
+    <Compile Include="..\Kitty\High\KittyHigh.cs">
+      <Link>Kitty\KittyHigh.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighBASIC.cs">
+      <Link>Kitty\KittyHighBASIC.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighBlitzBasic.cs">
+      <Link>Kitty\KittyHighBlitzBasic.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighBrainFuck.cs">
+      <Link>Kitty\KittyHighBrainFuck.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighC.cs">
+      <Link>Kitty\KittyHighC.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighCobra.cs">
+      <Link>Kitty\KittyHighCobra.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighCS.cs">
+      <Link>Kitty\KittyHighCS.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighGINI.cs">
+      <Link>Kitty\KittyHighGINI.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighGo.cs">
+      <Link>Kitty\KittyHighGo.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighHtml.cs">
+      <Link>Kitty\KittyHighHtml.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighINI.cs">
+      <Link>Kitty\KittyHighINI.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighJava.cs">
+      <Link>Kitty\KittyHighJava.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighJavaScript.cs">
+      <Link>Kitty\KittyHighJavaScript.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighNIL.cs">
+      <Link>Kitty\KittyHighNIL.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighPascal.cs">
+      <Link>Kitty\KittyHighPascal.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighPython.cs">
+      <Link>Kitty\KittyHighPython.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighSASKIA.cs">
+      <Link>Kitty\KittyHighSASKIA.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighScyndi.cs">
+      <Link>Kitty\KittyHighScyndi.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighVB.cs">
+      <Link>Kitty\KittyHighVB.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighWhiteSpace.cs">
+      <Link>Kitty\KittyHighWhiteSpace.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighXml.cs">
+      <Link>Kitty\KittyHighXml.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KityHighBlitzMax.cs">
+      <Link>Kitty\KityHighBlitzMax.cs</Link>
+    </Compile>
     <Compile Include="..\TrickyUnits\Dirry.cs">
       <Link>Units\Dirry.cs</Link>
     </Compile>
@@ -215,6 +281,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core.cs" />
+    <Compile Include="KittyViewer.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -271,6 +338,10 @@
     <Content Include="Nothing.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="NoViewSwap.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

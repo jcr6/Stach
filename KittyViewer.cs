@@ -21,9 +21,10 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.06.01
+// Version: 20.06.02
 // EndLic
-???using System;
+
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
@@ -74,7 +75,7 @@ namespace Stach {
         static public void Init() {
             InitDone = true;
             MKL.Lic    ("Stach - KittyViewer.cs","GNU General Public License 3");
-            MKL.Version("Stach - KittyViewer.cs","20.06.01");
+            MKL.Version("Stach - KittyViewer.cs","20.06.02");
             Debug.WriteLine("Init Kitty Source View Drivers");
             KittyHigh.Init();
             new KittyBlitzMax();
@@ -104,6 +105,10 @@ namespace Stach {
         }
 
         static public void View(string file,string showme) {
+            if (HexViewer.IsBinary(showme)) {
+                HexViewer.View(showme, file);
+                return;
+            }
             if (!InitDone) Init();
             Debug.WriteLine("Setting up view");
             var KV = new KittyViewer();

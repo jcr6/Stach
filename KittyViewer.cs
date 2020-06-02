@@ -64,7 +64,7 @@ namespace Stach {
         }
 
         public override void Write(string a) {
-            sb.Append($"<span style='color: {Cols[ForegroundColor]}; background-color: {Cols[BackgroundColor]}'>{a}</span>");
+            sb.Append($"<span style='color: {Cols[ForegroundColor]}; background-color: {Cols[BackgroundColor]}'>{a.Replace("<","&lt;")}</span>");
         }
 
         public override void WriteLine(string a) => Write($"{a}\n");

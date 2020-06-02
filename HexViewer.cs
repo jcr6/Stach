@@ -59,20 +59,21 @@ namespace Stach {
                 }
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 //Console.Write(Fmt.sprintf("%02X ", (byte)dat[i]));
-                Console.Write(("0"+b.ToString("X")).Substring(0,2)+" ");
+                Console.Write(("0" + b.ToString("X")).Substring(0, 2) + " ");
                 if (b >= 32 && b < 127)
                     t.Append(dat[i]);
                 else
                     t.Append(".");
             }
-            for (int i = p; i < 16; ++i) {
+            for (int i = p; i < 15; ++i) {
                 Console.ForegroundColor = ConsoleColor.Black;
                 Console.Write("   ");
-                Console.ForegroundColor = ConsoleColor.Yellow;
-                Console.Write($"  {t}");
             }
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.Write($"  {t}");
             Directory.CreateDirectory(Core.ViewSwap);
             QuickStream.SaveString($"{Core.ViewSwap}/ViewFile.html", Console.ToString());
+            Console = null;
         }
 
     }

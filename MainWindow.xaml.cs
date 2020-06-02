@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.06.01
+// Version: 20.06.02
 // EndLic
 using System;
 using System.Collections.Generic;
@@ -149,7 +149,7 @@ namespace Stach {
         public MainWindow() {
             try {
                 InitializeComponent();
-                MKL.Version("Stach - MainWindow.xaml.cs","20.06.01");
+                MKL.Version("Stach - MainWindow.xaml.cs","20.06.02");
                 MKL.Lic    ("Stach - MainWindow.xaml.cs","GNU General Public License 3");
                 Title = $"Stach - (c) {MKL.CYear(2020)} Jeroen P. Broks";
                 ExampleSwap.Text = Core.Config[Platform, "ExampleSwap"];
@@ -228,7 +228,19 @@ namespace Stach {
                     if (Core.Config[Core.Platform,"ViewSwap"]=="") {
                         Viewer.Navigate($"file://{Core.MyExeDir}/NoViewSwap.html");
                     } else {
-                        KittyViewer.View($"{E.MainFile}/{E.Entry}", Core.JCR.LoadString(E.Entry));
+                        switch (qstr.ExtractExt(E.Entry).ToLower()) {
+                            case "jpg":
+                            case "jpeg":
+                            case "gif":
+                            case "bmp":
+                            case "png":
+                                ImgViewer.ViewImg(Core.JCR.JCR_B(E.Entry), $"{E.MainFile}/{E.Entry}");
+                                Viewer.Refresh();
+                                break;
+                            default:
+                                KittyViewer.View($"{E.MainFile}/{E.Entry}", Core.JCR.LoadString(E.Entry));
+                                break;
+                        }
                         Viewer.Navigate($"file://{Core.Config[Core.Platform, "VIEWSWAP"]}/ViewFile.html");
                     }
                 } 
@@ -239,7 +251,18 @@ namespace Stach {
                     if (Core.Config[Core.Platform, "ViewSwap"] == "") {
                         Viewer.Navigate($"file://{Core.MyExeDir}/NoViewSwap.html");
                     } else {
-                        KittyViewer.View($"{ename}", QuickStream.LoadString(ename));
+                        switch (qstr.ExtractExt(ename).ToLower()) {
+                            case "jpg":
+                            case "jpeg":
+                            case "gif":
+                            case "bmp":
+                            case "png":
+                                ImgViewer.ViewImg(QuickStream.GetFile(ename), ename);
+                                break;
+                            default:
+                                KittyViewer.View($"{ename}", QuickStream.LoadString(ename));
+                                break;
+                        }
                         Viewer.Navigate($"file://{Core.Config[Core.Platform, "VIEWSWAP"]}/ViewFile.html");
                     }
 

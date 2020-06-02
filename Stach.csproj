@@ -258,6 +258,9 @@
     <Compile Include="..\TrickyUnits\FileList.cs">
       <Link>Units\FileList.cs</Link>
     </Compile>
+    <Compile Include="..\TrickyUnits\Fmt.cs">
+      <Link>Units\Fmt.cs</Link>
+    </Compile>
     <Compile Include="..\TrickyUnits\FormConfirm.cs">
       <Link>Units\FormConfirm.cs</Link>
     </Compile>
@@ -281,6 +284,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Core.cs" />
+    <Compile Include="HexViewer.cs" />
+    <Compile Include="ImgViewer.cs" />
     <Compile Include="KittyViewer.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

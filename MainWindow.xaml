@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Stach"
         mc:Ignorable="d"
-        Title="MainWindow" Height="924.246" Width="1217.672" ResizeMode="NoResize">
+        Title="MainWindow" Height="924.246" Width="1419.672" ResizeMode="NoResize">
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -13,7 +13,7 @@
                 <GradientStop Color="#FFB400FF" Offset="1"/>
             </LinearGradientBrush>
         </Grid.Background>
-        <TabControl HorizontalAlignment="Left" Height="873" Margin="10,10,0,0" VerticalAlignment="Top" Width="1190">
+        <TabControl HorizontalAlignment="Left" Height="873" Margin="10,10,0,0" VerticalAlignment="Top" Width="1394">
             <TabItem Header="JCR">
                 <Grid>
                     <Grid.Background>
@@ -67,12 +67,12 @@
                             </LinearGradientBrush>
                         </ListBox.Foreground>
                     </ListBox>
-                    <TabControl HorizontalAlignment="Left" Height="767" Margin="623,68,0,0" VerticalAlignment="Top" Width="551">
+                    <TabControl HorizontalAlignment="Left" Height="767" Margin="623,68,0,0" VerticalAlignment="Top" Width="755">
                         <TabControl.Background>
                             <ImageBrush ImageSource="Back_JCR.png"/>
                         </TabControl.Background>
                         <TabItem Header="Data">
-                            <Grid>
+                            <Grid Margin="0,0,-204,0">
                                 <Grid.Background>
                                     <ImageBrush ImageSource="Back_JCR.png" Stretch="UniformToFill"/>
                                 </Grid.Background>
@@ -99,13 +99,13 @@
                                 <Label Content="Author:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,260,0,0"/>
                                 <Label x:Name="Entry_Author" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,260,0,0" VerticalAlignment="Top" Width="394"/>
                                 <Label Content="Notes:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,286,0,0"/>
-                                <Label x:Name="Entry_Notes" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,286,0,0" VerticalAlignment="Top" Width="394" Height="56"/>
-                                <Label Content="Res-Type:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,400,0,0"/>
-                                <Label x:Name="ResType" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,400,0,0" VerticalAlignment="Top" Width="394" Height="26"/>
-                                <Label Content="TableSTG:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,426,0,0"/>
-                                <Label x:Name="ResTableSTG" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,426,0,0" VerticalAlignment="Top" Width="394" Height="26"/>
-                                <Label Content="Alias:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,334,0,0"/>
-                                <ListBox x:Name="Entry_Alias" HorizontalAlignment="Left" Height="61" Margin="126,334,0,0" VerticalAlignment="Top" Width="409">
+                                <Label x:Name="Entry_Notes" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,286,0,0" VerticalAlignment="Top" Width="604" Height="272"/>
+                                <Label Content="Res-Type:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,629,0,0"/>
+                                <Label x:Name="ResType" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,629,0,0" VerticalAlignment="Top" Width="394" Height="26"/>
+                                <Label Content="TableSTG:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,660,0,0"/>
+                                <Label x:Name="ResTableSTG" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,651,0,0" VerticalAlignment="Top" Width="394" Height="26"/>
+                                <Label Content="Alias:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,563,0,0"/>
+                                <ListBox x:Name="Entry_Alias" HorizontalAlignment="Left" Height="61" Margin="126,563,0,0" VerticalAlignment="Top" Width="604">
                                     <ListBox.Foreground>
                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                                             <GradientStop Color="Yellow" Offset="0"/>
@@ -129,7 +129,7 @@
                                         <GradientStop Color="#F2FFB400" Offset="1"/>
                                     </LinearGradientBrush>
                                 </Grid.Background>
-                                <WebBrowser HorizontalAlignment="Left" Height="719" Margin="10,10,0,0" VerticalAlignment="Top" Width="525" Name="Viewer" />
+                                <WebBrowser HorizontalAlignment="Left" Height="719" Margin="10,10,0,0" VerticalAlignment="Top" Width="729" Name="Viewer" />
                             </Grid>
                         </TabItem>
                     </TabControl>

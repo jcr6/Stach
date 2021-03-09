@@ -41,6 +41,26 @@
                         </TabItem>
                         <TabItem Header="Used">
                             <Grid Background="#FFE5E5E5">
+                                <Button x:Name="Clear_Used" Content="Clear" Margin="10,771,10,0" Click="Clear_Used_Click">
+                                    <Button.Foreground>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFFFB400" Offset="0"/>
+                                            <GradientStop Color="Yellow" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Foreground>
+                                    <Button.BorderBrush>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FF640078" Offset="0"/>
+                                            <GradientStop Color="Red" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.BorderBrush>
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="Red" Offset="0"/>
+                                            <GradientStop Color="#FF640078" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
                                 <ListBox x:Name="List_Used" HorizontalAlignment="Left" Height="756" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Foreground="#FF191200" SelectionChanged="List_Used_SelectionChanged">
                                     <ListBox.Background>
                                         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -52,7 +72,32 @@
                             </Grid>
                         </TabItem>
                         <TabItem Header="Favs">
-                            <Grid Background="#FFE5E5E5"/>
+                            <Grid Background="Black">
+                                <Button x:Name="AddFav" Margin="0,762,97,0" Content="+" Click="AddFav_Click">
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFB4FF00" Offset="0"/>
+                                            <GradientStop Color="Lime" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                                <Button x:Name="RemoveFav" Content="-" Margin="82,762,0,0">
+                                    <Button.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFFFB400" Offset="0"/>
+                                            <GradientStop Color="Red" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </Button.Background>
+                                </Button>
+                                <ListBox x:Name="Listbox_Favs" Margin="0,0,0,35" Foreground="Yellow" BorderBrush="Black" SelectionChanged="Listbox_Favs_SelectionChanged" >
+                                    <ListBox.Background>
+                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                                            <GradientStop Color="#FFB400FF" Offset="0"/>
+                                            <GradientStop Color="#FF50009E" Offset="1"/>
+                                        </LinearGradientBrush>
+                                    </ListBox.Background>
+                                </ListBox>
+                            </Grid>
                         </TabItem>
                     </TabControl>
                     <Label Content="Resource:" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="61" Foreground="#FFFFB400"/>

@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2020
+// (c) Jeroen P. Broks, 2020, 2021
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.06.02
+// Version: 21.03.09
 // EndLic
 using System;
 using System.Collections.Generic;
@@ -149,7 +149,7 @@ namespace Stach {
         public MainWindow() {
             try {
                 InitializeComponent();
-                MKL.Version("Stach - MainWindow.xaml.cs","20.06.02");
+                MKL.Version("Stach - MainWindow.xaml.cs","21.03.09");
                 MKL.Lic    ("Stach - MainWindow.xaml.cs","GNU General Public License 3");
                 Title = $"Stach - (c) {MKL.CYear(2020)} Jeroen P. Broks";
                 ExampleSwap.Text = Core.Config[Platform, "ExampleSwap"];
@@ -162,6 +162,7 @@ namespace Stach {
                 Core.CDirectory =startd;
                 UpdateDirBox();
                 RenewUsed();
+                RenewFavs();
                 ViewNothing();
             } catch (Exception e) {
 #if DEBUG
@@ -250,6 +251,17 @@ namespace Stach {
                 if (!qstr.Suffixed(ename,"/")) {
                     if (Core.Config[Core.Platform, "ViewSwap"] == "") {
                         Viewer.Navigate($"file://{Core.MyExeDir}/NoViewSwap.html");
+                    } else if (JCR6.Recognize(ename).ToUpper()!="NONE") { 
+                        var odir = Core.Config[Core.Platform, "VIEWSWAP"];
+                        var KV = new KittyViewer();
+                        KV.ForegroundColor = ConsoleColor.Yellow;
+                        KV.WriteLine("JCR6 resource");
+                        KV.ForegroundColor = ConsoleColor.White;
+                        KV.WriteLine($"File {qstr.StripDir(ename)} has been recognized as: {JCR6.Recognize(ename)}");
+                        KV.WriteLine($"JCR6 understands this format, so why don't you open it to see its contents?");
+                        Directory.CreateDirectory(odir);
+                        QuickStream.SaveString($"{odir}/ViewJCRFile.html", KV.ToString());
+                        Viewer.Navigate($"{odir}/ViewJCRFile.html");
                     } else {
                         switch (qstr.ExtractExt(ename).ToLower()) {
                             case "jpg":
@@ -273,6 +285,13 @@ namespace Stach {
         void RenewUsed() {
             List_Used.Items.Clear();
             foreach (string u in Core.Config.List(Platform, "Used")) List_Used.Items.Add(u);
+        }
+
+        void RenewFavs() {
+            Listbox_Favs.Items.Clear();
+            var f = Core.Config.List(Platform, "FAVS");
+            f.Sort();
+            foreach (string u in f) Listbox_Favs.Items.Add(u);
         }
 
         private void DirBox_MouseDoubleClick(object sender, MouseButtonEventArgs e) {
@@ -379,6 +398,40 @@ namespace Stach {
             Debug.WriteLine($"Analysing {rf} => {rc}");
             if (rc == "NONE") {
                 Confirm.Annoy($"{item} was not recognized");
+                return;
+            }
+            Core.IN_Resource = true;
+            Core.Resource = rf;
+            Core.CDirectory = "";
+            //Core.Config.ListAddNew(Platform, "Used", rf);
+            //RenewUsed();
+            UpdateDirBox();
+            ResTableSTG.Content = Core.JCR.FATstorage;
+            ResType.Content = rc;
+            return;
+
+        }
+
+        private void Clear_Used_Click(object sender, RoutedEventArgs e) {
+            Core.Config.List(Platform, "Used").Clear();
+            RenewUsed();
+        }
+
+        private void AddFav_Click(object sender, RoutedEventArgs e) {
+            if (Core.IN_Resource) {
+                Core.Config.ListAddNew(Platform, "Favs",Core.Resource);
+                Core.Config.List(Platform, "Favs").Sort();
+                RenewFavs();
+            }
+        }
+
+        private void Listbox_Favs_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (Listbox_Favs.SelectedItem == null) return;
+            var rf = (string)Listbox_Favs.SelectedItem;
+            var rc = JCR6.Recognize(rf);
+            Debug.WriteLine($"Analysing {rf} => {rc}");
+            if (rc == "NONE") {
+                Confirm.Annoy($"{rf} was not recognized");
                 return;
             }
             Core.IN_Resource = true;

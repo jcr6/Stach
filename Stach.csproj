@@ -183,6 +183,9 @@
     <Compile Include="..\JCR6\Drivers\FileTypes\WAD.cs">
       <Link>JCR6\Drivers\FileTypes\WAD.cs</Link>
     </Compile>
+    <Compile Include="..\JCR6\Drivers\FileTypes\WestwoodPAK.cs">
+      <Link>JCR6\Drivers\FileTypes\WestwoodPAK.cs</Link>
+    </Compile>
     <Compile Include="..\JCR6\jcr6.cs">
       <Link>JCR6\jcr6.cs</Link>
     </Compile>
@@ -224,6 +227,9 @@
     </Compile>
     <Compile Include="..\Kitty\High\KittyHighJavaScript.cs">
       <Link>Kitty\KittyHighJavaScript.cs</Link>
+    </Compile>
+    <Compile Include="..\Kitty\High\KittyHighNeil.cs">
+      <Link>Kitty\KittyHighNeil.cs</Link>
     </Compile>
     <Compile Include="..\Kitty\High\KittyHighNIL.cs">
       <Link>Kitty\KittyHighNIL.cs</Link>

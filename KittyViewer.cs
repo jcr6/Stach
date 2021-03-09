@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2020
+// (c) Jeroen P. Broks, 2020, 2021
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 20.06.02
+// Version: 21.03.09
 // EndLic
 
 using System;
@@ -75,7 +75,7 @@ namespace Stach {
         static public void Init() {
             InitDone = true;
             MKL.Lic    ("Stach - KittyViewer.cs","GNU General Public License 3");
-            MKL.Version("Stach - KittyViewer.cs","20.06.02");
+            MKL.Version("Stach - KittyViewer.cs","21.03.09");
             Debug.WriteLine("Init Kitty Source View Drivers");
             KittyHigh.Init();
             new KittyBlitzMax();
@@ -93,6 +93,7 @@ namespace Stach {
             new KittyHighJavaScript();
             new KittyHighJSON();
             new KittyHighLua();
+            new KittyHighNeil();
             new KittyHighNIL();
             new KittyHighPascal();
             new KittyHighPython();

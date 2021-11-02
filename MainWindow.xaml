@@ -1,227 +1,264 @@
 ﻿<Window x:Class="Stach.MainWindow"
-        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Stach"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="924.246" Width="1419.672" ResizeMode="NoResize">
-    <Grid>
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="Black" Offset="0"/>
-                <GradientStop Color="#FFB400FF" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <TabControl HorizontalAlignment="Left" Height="873" Margin="10,10,0,0" VerticalAlignment="Top" Width="1394">
-            <TabItem Header="JCR">
-                <Grid>
-                    <Grid.Background>
-                        <ImageBrush ImageSource="Back_JCR.png"/>
-                    </Grid.Background>
-                    <TabControl HorizontalAlignment="Left" Height="825" Margin="10,10,0,0" VerticalAlignment="Top" Width="185">
-                        <TabItem Header="System">
-                            <Grid Background="Black">
-                                <ListBox x:Name="List_System" HorizontalAlignment="Left" Height="787" Margin="10,0,0,0" VerticalAlignment="Top" Width="159" FontFamily="Courier New" SelectionChanged="List_System_SelectionChanged">
-                                    <ListBox.Foreground>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFB9FF00" Offset="0"/>
-                                            <GradientStop Color="Lime" Offset="1"/>
-                                            <GradientStop Color="Lime" Offset="0.983"/>
-                                        </LinearGradientBrush>
-                                    </ListBox.Foreground>
-                                    <ListBox.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="Black" Offset="0"/>
-                                            <GradientStop Color="DarkGreen" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </ListBox.Background>
-                                </ListBox>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Used">
-                            <Grid Background="#FFE5E5E5">
-                                <Button x:Name="Clear_Used" Content="Clear" Margin="10,771,10,0" Click="Clear_Used_Click">
-                                    <Button.Foreground>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFFFB400" Offset="0"/>
-                                            <GradientStop Color="Yellow" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Button.Foreground>
-                                    <Button.BorderBrush>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FF640078" Offset="0"/>
-                                            <GradientStop Color="Red" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Button.BorderBrush>
-                                    <Button.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="Red" Offset="0"/>
-                                            <GradientStop Color="#FF640078" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Button.Background>
-                                </Button>
-                                <ListBox x:Name="List_Used" HorizontalAlignment="Left" Height="756" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Foreground="#FF191200" SelectionChanged="List_Used_SelectionChanged">
-                                    <ListBox.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFFFB400" Offset="0"/>
-                                            <GradientStop Color="Red" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </ListBox.Background>
-                                </ListBox>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="Favs">
-                            <Grid Background="Black">
-                                <Button x:Name="AddFav" Margin="0,762,97,0" Content="+" Click="AddFav_Click">
-                                    <Button.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFB4FF00" Offset="0"/>
-                                            <GradientStop Color="Lime" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Button.Background>
-                                </Button>
-                                <Button x:Name="RemoveFav" Content="-" Margin="82,762,0,0">
-                                    <Button.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFFFB400" Offset="0"/>
-                                            <GradientStop Color="Red" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </Button.Background>
-                                </Button>
-                                <ListBox x:Name="Listbox_Favs" Margin="0,0,0,35" Foreground="Yellow" BorderBrush="Black" SelectionChanged="Listbox_Favs_SelectionChanged" >
-                                    <ListBox.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="#FFB400FF" Offset="0"/>
-                                            <GradientStop Color="#FF50009E" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </ListBox.Background>
-                                </ListBox>
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
-                    <Label Content="Resource:" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="61" Foreground="#FFFFB400"/>
-                    <Label Content="Directory:" HorizontalAlignment="Left" Margin="200,31,0,0" VerticalAlignment="Top" Width="61" Foreground="#FFFFB400"/>
-                    <TextBox x:Name="txt_Resource" HorizontalAlignment="Left" Height="23" Margin="266,4,0,0" TextWrapping="Wrap" Text=".." IsReadOnly="True" VerticalAlignment="Top" Width="896" Background="Black" Foreground="#FFFFB400"/>
-                    <TextBox x:Name="txt_Directory" HorizontalAlignment="Left" Height="23" Margin="266,29,0,0" TextWrapping="Wrap" Text=".." IsReadOnly="True" VerticalAlignment="Top" Width="896" Background="Black" Foreground="#FFFFB400"/>
-                    <ListBox x:Name="DirBox" MouseDoubleClick="DirBox_MouseDoubleClick"  HorizontalAlignment="Left" Height="728" Margin="214,62,0,0" VerticalAlignment="Top" Width="381" Background="{x:Null}" SelectionChanged="DirBox_SelectionChanged">
-                        <ListBox.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFFFB400" Offset="0"/>
-                                <GradientStop Color="#FFB4FF00" Offset="1"/>
-                            </LinearGradientBrush>
-                        </ListBox.Foreground>
-                    </ListBox>
-                    <TabControl HorizontalAlignment="Left" Height="767" Margin="623,68,0,0" VerticalAlignment="Top" Width="755">
-                        <TabControl.Background>
-                            <ImageBrush ImageSource="Back_JCR.png"/>
-                        </TabControl.Background>
-                        <TabItem Header="Data">
-                            <Grid Margin="0,0,-204,0">
-                                <Grid.Background>
-                                    <ImageBrush ImageSource="Back_JCR.png" Stretch="UniformToFill"/>
-                                </Grid.Background>
-                                <Label Content="Entry:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89"/>
-                                <Label x:Name="Entry_Entry" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,0,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Main File:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,26,0,0"/>
-                                <Label x:Name="Entry_Main" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,26,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Type:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,52,0,0"/>
-                                <Label x:Name="Entry_Type" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,52,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Size:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,78,0,0"/>
-                                <Label x:Name="Entry_Size" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,78,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Comp. Size:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,104,0,0"/>
-                                <Label x:Name="Entry_CSize" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,104,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Ratio:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,130,0,0"/>
-                                <Label x:Name="Entry_Ratio" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,130,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Storage:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,156,0,0"/>
-                                <Label x:Name="Entry_Storage" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,156,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Offset:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,182,0,0"/>
-                                <Label x:Name="Entry_Offset" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,182,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="MD5 Hash:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,208,0,0"/>
-                                <Label x:Name="Entry_MD5Hash" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,208,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="JCR6:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,234,0,0"/>
-                                <Label x:Name="Entry_JCR6FOR" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,234,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Author:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,260,0,0"/>
-                                <Label x:Name="Entry_Author" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,260,0,0" VerticalAlignment="Top" Width="394"/>
-                                <Label Content="Notes:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,286,0,0"/>
-                                <Label x:Name="Entry_Notes" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,286,0,0" VerticalAlignment="Top" Width="604" Height="272"/>
-                                <Label Content="Res-Type:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,629,0,0"/>
-                                <Label x:Name="ResType" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,629,0,0" VerticalAlignment="Top" Width="394" Height="26"/>
-                                <Label Content="TableSTG:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,660,0,0"/>
-                                <Label x:Name="ResTableSTG" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,651,0,0" VerticalAlignment="Top" Width="394" Height="26"/>
-                                <Label Content="Alias:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,563,0,0"/>
-                                <ListBox x:Name="Entry_Alias" HorizontalAlignment="Left" Height="61" Margin="126,563,0,0" VerticalAlignment="Top" Width="604">
-                                    <ListBox.Foreground>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="Yellow" Offset="0"/>
-                                            <GradientStop Color="White" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </ListBox.Foreground>
-                                    <ListBox.Background>
-                                        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                            <GradientStop Color="Black" Offset="0"/>
-                                            <GradientStop Color="Blue" Offset="1"/>
-                                        </LinearGradientBrush>
-                                    </ListBox.Background>
-                                </ListBox>
-                            </Grid>
-                        </TabItem>
-                        <TabItem Header="View" Margin="-2,0">
-                            <Grid x:Name="ViewGrid">
-                                <Grid.Background>
-                                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                        <GradientStop Color="Black" Offset="0"/>
-                                        <GradientStop Color="#F2FFB400" Offset="1"/>
-                                    </LinearGradientBrush>
-                                </Grid.Background>
-                                <WebBrowser HorizontalAlignment="Left" Height="719" Margin="10,10,0,0" VerticalAlignment="Top" Width="729" Name="Viewer" />
-                            </Grid>
-                        </TabItem>
-                    </TabControl>
-                    <Button Content="Open JCR" x:Name="Butt_OpenJCR" HorizontalAlignment="Left" Margin="214,795,0,0" VerticalAlignment="Top" Width="75"/>
-                    <Button Content="Extract" x:Name="Butt_Extract" HorizontalAlignment="Left" Margin="294,795,0,0" VerticalAlignment="Top" Width="75" Click="Butt_Extract_Click"/>
-                    <Button Content="Extract All" x:Name="Butt_ExtractAll" HorizontalAlignment="Left" Margin="374,795,0,0" VerticalAlignment="Top" Width="75"/>
-                </Grid>
-            </TabItem>
-            <TabItem Header="System">
-                <Grid>
-                    <Grid.Background>
-                        <ImageBrush ImageSource="Back_Config.png" />
-                    </Grid.Background>
-                    <Label Content="Stach, coded and copyrighted by Jeroen P. Broks. Licensed under the GPL3
-                           " HorizontalAlignment="Left" Margin="370,10,0,0" VerticalAlignment="Top" Width="414" Foreground="#FF00B4FF"/>
-                    <Label Content="Example Swap Dir:" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Width="249" Foreground="#FF00B4FF"/>
-                    <TextBox x:Name="ExampleSwap" HorizontalAlignment="Left" Height="23" Margin="170,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="588" Foreground="#FFFFB400" TextChanged="ExampleSwap_TextChanged">
-                        <TextBox.BorderBrush>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FFFFB400" Offset="0"/>
-                                <GradientStop Color="Black" Offset="1"/>
-                            </LinearGradientBrush>
-                        </TextBox.BorderBrush>
-                        <TextBox.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="Black" Offset="0"/>
-                                <GradientStop Color="#FFFFB400" Offset="1"/>
-                            </LinearGradientBrush>
-                        </TextBox.Background>
-                    </TextBox>
-                    <Button Content="Browse" HorizontalAlignment="Left" Margin="784,48,0,0" VerticalAlignment="Top" Width="75" Click="BrowseExample">
-                        <Button.Background>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="#FF64B400" Offset="0"/>
-                                <GradientStop Color="#FF001400" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Background>
-                        <Button.Foreground>
-                            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                                <GradientStop Color="Black" Offset="0"/>
-                                <GradientStop Color="#FFB4FF00" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Button.Foreground>
-                    </Button>
-                </Grid>
-            </TabItem>
-        </TabControl>
+		xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+		xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+		xmlns:local="clr-namespace:Stach"
+		mc:Ignorable="d"
+		Title="MainWindow" Height="924.246" Width="1425.672" ResizeMode="NoResize">
+	<Grid>
+		<Grid.Background>
+			<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+				<GradientStop Color="Black" Offset="0"/>
+				<GradientStop Color="#FFB400FF" Offset="1"/>
+			</LinearGradientBrush>
+		</Grid.Background>
+		<TabControl HorizontalAlignment="Left" Height="873" Margin="10,10,0,0" VerticalAlignment="Top" Width="1394">
+			<TabItem Header="JCR">
+				<Grid>
+					<Grid.Background>
+						<ImageBrush ImageSource="Back_JCR.png"/>
+					</Grid.Background>
+					<TabControl HorizontalAlignment="Left" Height="825" Margin="10,10,0,0" VerticalAlignment="Top" Width="185">
+						<TabItem Header="System">
+							<Grid Background="Black">
+								<ListBox x:Name="List_System" HorizontalAlignment="Left" Height="787" Margin="10,0,0,0" VerticalAlignment="Top" Width="159" FontFamily="Courier New" SelectionChanged="List_System_SelectionChanged">
+									<ListBox.Foreground>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFB9FF00" Offset="0"/>
+											<GradientStop Color="Lime" Offset="1"/>
+											<GradientStop Color="Lime" Offset="0.983"/>
+										</LinearGradientBrush>
+									</ListBox.Foreground>
+									<ListBox.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="Black" Offset="0"/>
+											<GradientStop Color="DarkGreen" Offset="1"/>
+										</LinearGradientBrush>
+									</ListBox.Background>
+								</ListBox>
+							</Grid>
+						</TabItem>
+						<TabItem Header="Used">
+							<Grid Background="#FFE5E5E5">
+								<Button x:Name="Clear_Used" Content="Clear" Margin="10,771,10,0" Click="Clear_Used_Click">
+									<Button.Foreground>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFFFB400" Offset="0"/>
+											<GradientStop Color="Yellow" Offset="1"/>
+										</LinearGradientBrush>
+									</Button.Foreground>
+									<Button.BorderBrush>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FF640078" Offset="0"/>
+											<GradientStop Color="Red" Offset="1"/>
+										</LinearGradientBrush>
+									</Button.BorderBrush>
+									<Button.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="Red" Offset="0"/>
+											<GradientStop Color="#FF640078" Offset="1"/>
+										</LinearGradientBrush>
+									</Button.Background>
+								</Button>
+								<ListBox x:Name="List_Used" HorizontalAlignment="Left" Height="756" Margin="10,10,0,0" VerticalAlignment="Top" Width="159" Foreground="#FF191200" SelectionChanged="List_Used_SelectionChanged">
+									<ListBox.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFFFB400" Offset="0"/>
+											<GradientStop Color="Red" Offset="1"/>
+										</LinearGradientBrush>
+									</ListBox.Background>
+								</ListBox>
+							</Grid>
+						</TabItem>
+						<TabItem Header="Favs">
+							<Grid Background="Black">
+								<Button x:Name="AddFav" Margin="0,762,97,0" Content="+" Click="AddFav_Click">
+									<Button.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFB4FF00" Offset="0"/>
+											<GradientStop Color="Lime" Offset="1"/>
+										</LinearGradientBrush>
+									</Button.Background>
+								</Button>
+								<Button x:Name="RemoveFav" Content="-" Margin="82,762,0,0">
+									<Button.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFFFB400" Offset="0"/>
+											<GradientStop Color="Red" Offset="1"/>
+										</LinearGradientBrush>
+									</Button.Background>
+								</Button>
+								<ListBox x:Name="Listbox_Favs" Margin="0,0,0,35" Foreground="Yellow" BorderBrush="Black" SelectionChanged="Listbox_Favs_SelectionChanged" >
+									<ListBox.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="#FFB400FF" Offset="0"/>
+											<GradientStop Color="#FF50009E" Offset="1"/>
+										</LinearGradientBrush>
+									</ListBox.Background>
+								</ListBox>
+							</Grid>
+						</TabItem>
+					</TabControl>
+					<Label Content="Resource:" HorizontalAlignment="Left" Margin="200,0,0,0" VerticalAlignment="Top" Width="61" Foreground="#FFFFB400"/>
+					<Label Content="Directory:" HorizontalAlignment="Left" Margin="200,31,0,0" VerticalAlignment="Top" Width="61" Foreground="#FFFFB400"/>
+					<TextBox x:Name="txt_Resource" HorizontalAlignment="Left" Height="23" Margin="266,4,0,0" TextWrapping="Wrap" Text=".." IsReadOnly="True" VerticalAlignment="Top" Width="896" Background="Black" Foreground="#FFFFB400"/>
+					<TextBox x:Name="txt_Directory" HorizontalAlignment="Left" Height="23" Margin="266,29,0,0" TextWrapping="Wrap" Text=".." IsReadOnly="True" VerticalAlignment="Top" Width="896" Background="Black" Foreground="#FFFFB400"/>
+					<ListBox x:Name="DirBox" MouseDoubleClick="DirBox_MouseDoubleClick"  HorizontalAlignment="Left" Height="728" Margin="214,62,0,0" VerticalAlignment="Top" Width="381" Background="{x:Null}" SelectionChanged="DirBox_SelectionChanged">
+						<ListBox.Foreground>
+							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+								<GradientStop Color="#FFFFB400" Offset="0"/>
+								<GradientStop Color="#FFB4FF00" Offset="1"/>
+							</LinearGradientBrush>
+						</ListBox.Foreground>
+					</ListBox>
+					<TabControl HorizontalAlignment="Left" Height="767" Margin="623,68,0,0" VerticalAlignment="Top" Width="755">
+						<TabControl.Background>
+							<ImageBrush ImageSource="Back_JCR.png"/>
+						</TabControl.Background>
+						<TabItem Header="Data">
+							<Grid Margin="0,0,-204,0">
+								<Grid.Background>
+									<ImageBrush ImageSource="Back_JCR.png" Stretch="UniformToFill"/>
+								</Grid.Background>
+								<Label Content="Entry:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89"/>
+								<Label x:Name="Entry_Entry" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,0,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Main File:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,26,0,0"/>
+								<Label x:Name="Entry_Main" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,26,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Type:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,52,0,0"/>
+								<Label x:Name="Entry_Type" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,52,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Size:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,78,0,0"/>
+								<Label x:Name="Entry_Size" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,78,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Comp. Size:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,104,0,0"/>
+								<Label x:Name="Entry_CSize" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,104,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Ratio:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,130,0,0"/>
+								<Label x:Name="Entry_Ratio" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,130,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Storage:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,156,0,0"/>
+								<Label x:Name="Entry_Storage" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,156,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Offset:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,182,0,0"/>
+								<Label x:Name="Entry_Offset" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,182,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="MD5 Hash:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,208,0,0"/>
+								<Label x:Name="Entry_MD5Hash" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,208,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="JCR6:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,234,0,0"/>
+								<Label x:Name="Entry_JCR6FOR" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,234,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Author:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,260,0,0"/>
+								<Label x:Name="Entry_Author" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,260,0,0" VerticalAlignment="Top" Width="394"/>
+								<Label Content="Notes:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="0,286,0,0"/>
+								<Label x:Name="Entry_Notes" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,286,0,0" VerticalAlignment="Top" Width="604" Height="272"/>
+								<Label Content="Res-Type:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,629,0,0"/>
+								<Label x:Name="ResType" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,629,0,0" VerticalAlignment="Top" Width="394" Height="26"/>
+								<Label Content="TableSTG:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,660,0,0"/>
+								<Label x:Name="ResTableSTG" Content="--" ScrollViewer.CanContentScroll="True" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,651,0,0" VerticalAlignment="Top" Width="394" Height="26"/>
+								<Label Content="Alias:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89" Margin="10,563,0,0"/>
+								<ListBox x:Name="Entry_Alias" HorizontalAlignment="Left" Height="61" Margin="126,563,0,0" VerticalAlignment="Top" Width="604">
+									<ListBox.Foreground>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="Yellow" Offset="0"/>
+											<GradientStop Color="White" Offset="1"/>
+										</LinearGradientBrush>
+									</ListBox.Foreground>
+									<ListBox.Background>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="Black" Offset="0"/>
+											<GradientStop Color="Blue" Offset="1"/>
+										</LinearGradientBrush>
+									</ListBox.Background>
+								</ListBox>
+							</Grid>
+						</TabItem>
+						<TabItem Header="Block">
+							<Grid x:Name="BlockGrid">
+								<Label x:Name="NoBlock" Content="This entry is not part of a block" FontSize="18" >
+									<Label.Foreground>
+										<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+											<GradientStop Color="Yellow" Offset="0"/>
+											<GradientStop Color="#FFFFB400" Offset="1"/>
+										</LinearGradientBrush>
+									</Label.Foreground>
+								</Label>
+								<Grid x:Name="BlockData" Visibility="Hidden">
+                                    <Label Content="Entry:" Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Width="89"/>
+                                    <Label x:Name="Entry_Entry_Block" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,0,0,0" VerticalAlignment="Top" Width="394"/>
+                                    <Label Content="Block:"  Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,26,0,0"/>
+                                    <Label x:Name="Entry_Block" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,26,0,0" VerticalAlignment="Top" Width="394"/>
+                                    <Label Content="Block Entries:"  Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,52,0,0"/>
+                                    <ListBox x:Name="Block_Entries" Margin="126,52,28,593" Foreground="Cyan">
+                                        <ListBox.Background>
+                                            <RadialGradientBrush>
+                                                <GradientStop Color="#FF00B4FF" Offset="0"/>
+                                                <GradientStop Color="#FF001219" Offset="1"/>
+                                            </RadialGradientBrush>
+                                        </ListBox.Background>
+                                    </ListBox>
+                                    <Label Content="Entry Offset:"  Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,146,0,0"/>
+                                    <Label x:Name="Block_EntryOffset" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,146,0,0" VerticalAlignment="Top" Width="394"/>
+                                    <Label Content="Block Offset:"  Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,172,0,0" RenderTransformOrigin="0.592,0.538"/>
+                                    <Label x:Name="Block_Offset" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,172,0,0" VerticalAlignment="Top" Width="394"/>
+                                    <Label Content="Block Size:"  Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,198,0,0" RenderTransformOrigin="0.592,0.538"/>
+                                    <Label x:Name="Block_Size" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,198,0,0" VerticalAlignment="Top" Width="394"/>
+                                    <Label Content="Block Compr. Size:"  Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,224,0,0" RenderTransformOrigin="0.592,0.538"/>
+                                    <Label x:Name="Block_CSize" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,224,0,0" VerticalAlignment="Top" Width="394"/>
+                                    <Label Content="Ratio:"  Foreground="#ffb400" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,250,0,0" RenderTransformOrigin="0.592,0.538" Width="41"/>
+                                    <Label x:Name="Block_Ratio" Content="--" Foreground="#ffb400" HorizontalAlignment="Left" Margin="126,250,0,0" VerticalAlignment="Top" Width="394"/>
+                                </Grid>
+							</Grid>
+						</TabItem>
+						<TabItem Header="View" Margin="0,0,-13,0">
+							<Grid x:Name="ViewGrid">
+								<Grid.Background>
+									<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+										<GradientStop Color="Black" Offset="0"/>
+										<GradientStop Color="#F2FFB400" Offset="1"/>
+									</LinearGradientBrush>
+								</Grid.Background>
+								<WebBrowser HorizontalAlignment="Left" Height="719" Margin="10,10,0,0" VerticalAlignment="Top" Width="729" Name="Viewer" />
+							</Grid>
+						</TabItem>
+					</TabControl>
+					<Button Content="Open JCR" x:Name="Butt_OpenJCR" HorizontalAlignment="Left" Margin="214,795,0,0" VerticalAlignment="Top" Width="75"/>
+					<Button Content="Extract" x:Name="Butt_Extract" HorizontalAlignment="Left" Margin="294,795,0,0" VerticalAlignment="Top" Width="75" Click="Butt_Extract_Click"/>
+					<Button Content="Extract All" x:Name="Butt_ExtractAll" HorizontalAlignment="Left" Margin="374,795,0,0" VerticalAlignment="Top" Width="75"/>
+				</Grid>
+			</TabItem>
+			<TabItem Header="System">
+				<Grid>
+					<Grid.Background>
+						<ImageBrush ImageSource="Back_Config.png" />
+					</Grid.Background>
+					<Label Content="Stach, coded and copyrighted by Jeroen P. Broks. Licensed under the GPL3
+						   " HorizontalAlignment="Left" Margin="370,10,0,0" VerticalAlignment="Top" Width="414" Foreground="#FF00B4FF"/>
+					<Label Content="Example Swap Dir:" HorizontalAlignment="Left" Margin="10,45,0,0" VerticalAlignment="Top" Width="249" Foreground="#FF00B4FF"/>
+					<TextBox x:Name="ExampleSwap" HorizontalAlignment="Left" Height="23" Margin="170,48,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="588" Foreground="#FFFFB400" TextChanged="ExampleSwap_TextChanged">
+						<TextBox.BorderBrush>
+							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+								<GradientStop Color="#FFFFB400" Offset="0"/>
+								<GradientStop Color="Black" Offset="1"/>
+							</LinearGradientBrush>
+						</TextBox.BorderBrush>
+						<TextBox.Background>
+							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+								<GradientStop Color="Black" Offset="0"/>
+								<GradientStop Color="#FFFFB400" Offset="1"/>
+							</LinearGradientBrush>
+						</TextBox.Background>
+					</TextBox>
+					<Button Content="Browse" HorizontalAlignment="Left" Margin="784,48,0,0" VerticalAlignment="Top" Width="75" Click="BrowseExample">
+						<Button.Background>
+							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+								<GradientStop Color="#FF64B400" Offset="0"/>
+								<GradientStop Color="#FF001400" Offset="1"/>
+							</LinearGradientBrush>
+						</Button.Background>
+						<Button.Foreground>
+							<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+								<GradientStop Color="Black" Offset="0"/>
+								<GradientStop Color="#FFB4FF00" Offset="1"/>
+							</LinearGradientBrush>
+						</Button.Foreground>
+					</Button>
+				</Grid>
+			</TabItem>
+		</TabControl>
 
-    </Grid>
+	</Grid>
 </Window>

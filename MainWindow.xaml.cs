@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2020, 2021
+// (c) Jeroen P. Broks, 2020, 2021, 2022
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 21.11.02
+// Version: 22.05.21
 // EndLic
 using System;
 using System.Collections.Generic;
@@ -149,7 +149,7 @@ namespace Stach {
 		public MainWindow() {
 			try {
 				InitializeComponent();
-				MKL.Version("Stach - MainWindow.xaml.cs","21.11.02");
+				MKL.Version("Stach - MainWindow.xaml.cs","22.05.21");
 				MKL.Lic    ("Stach - MainWindow.xaml.cs","GNU General Public License 3");
 				Title = $"Stach - (c) {MKL.CYear(2020)} Jeroen P. Broks";
 				ExampleSwap.Text = Core.Config[Platform, "ExampleSwap"];
@@ -221,7 +221,7 @@ namespace Stach {
 					var E = Core.JCR.Entries[ename.ToUpper()];
 					UpdateBlockView(E.Block!=0);
 					foreach (TJCREntry ECHK in Core.JCR.Entries.Values) {
-						if (ECHK != E && ECHK.MainFile == E.MainFile && ECHK.Offset == E.Offset) Entry_Alias.Items.Add(ECHK.Entry);
+						if (ECHK != E && ECHK.MainFile == E.MainFile && ECHK.Offset == E.Offset && ECHK.Block==E.Block) Entry_Alias.Items.Add(ECHK.Entry);
 					}
 					foreach (string k in E.databool.Keys) {
 						if (EntryLink.ContainsKey(k)) {

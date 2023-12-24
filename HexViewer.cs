@@ -4,7 +4,7 @@
 // 
 // 
 // 
-// (c) Jeroen P. Broks, 2020, 2021
+// (c) Jeroen P. Broks, 2020, 2021, 2023
 // 
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@
 // Please note that some references to data like pictures or audio, do not automatically
 // fall under this licenses. Mostly this is noted in the respective files.
 // 
-// Version: 21.03.09
+// Version: 23.12.24
 // EndLic
 using System;
 using System.IO;
@@ -35,8 +35,14 @@ namespace Stach {
         static KittyOutput Console;
 
         static public bool IsBinary(string check) {
-            var i = check.IndexOf((char)26);
-            return i >= 0 && i <= check.Length - 1;
+            //var i = check.IndexOf((char)26);
+            //return i >= 0 && i <= check.Length - 1;
+            for(var i=0; i<check.Length; i++) {
+                var c = check[i];
+                if (c < 32 && c != 10 && c != 13 && c != 9 && c != 27) return true;
+                if (c > 126) return true;
+            }
+            return false;
         }
 
         static public void View(string dat, string file) => View(dat.ToCharArray(), file);

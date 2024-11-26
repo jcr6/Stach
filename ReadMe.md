@@ -1,3 +1,5 @@
+Stach has been deprecated and been replaced by [Gyèrmo](https://github.com/jcr6/Gyermo)
+
 # Stach
 
 Work in Progress.... Not usable yet!
